@@ -1,6 +1,6 @@
 # Build a Feedback Board with GitHub Copilot
 
-In this 45-minute lab, you will use GitHub Copilot in Visual Studio Code to finish a small website. The site uses only HTML, CSS, and JavaScript, so it opens directly in a browser without installing a runtime or package manager.
+In this 55-minute lab, you will use GitHub Copilot in Visual Studio Code to finish a small website. The site uses only HTML, CSS, and JavaScript, so it opens directly in a browser without installing a runtime or package manager.
 
 ## What you will practice
 
@@ -9,6 +9,7 @@ In this 45-minute lab, you will use GitHub Copilot in Visual Studio Code to fini
 - Generating and refining HTML, CSS, and JavaScript
 - Reviewing and testing suggestions before keeping them
 - Using Copilot to diagnose a bug and review accessibility
+- Using focused chat sessions and a README to carry useful context between tasks
 
 Copilot can produce different valid solutions. Your code does not need to match the `solution` folder exactly; it needs to satisfy each checkpoint.
 
@@ -28,10 +29,20 @@ No terminal, local server, build tool, or package installation is required.
 1. Open this workshop folder in Visual Studio Code.
 2. Open `starter/index.html`.
 3. Open the same file from File Explorer in your browser. You should see a heading and introduction.
-4. Keep the browser open. After each exercise, save your files and refresh the page.
+4. Keep the browser open. After each accepted change, save the edited file, refresh the page, and inspect the result when the change affects the page.
 5. Open Copilot Chat in Visual Studio Code.
 
 > **Working habit:** Treat every suggestion as a draft. Read the proposed changes, keep only what you understand, and test the result.
+
+## How you will use chat sessions
+
+You will use separate Copilot Chat sessions for different kinds of work:
+
+- A **README session** for project documentation. You will create this session after Exercise 1 and return to it twice.
+- An **HTML and CSS session** for Exercises 2 and 3.
+- A **JavaScript and review session** for Exercises 4 and 5.
+
+Starting a new session gives Copilot a fresh conversation context; it does not reset your files. At the start of each session, attach only the files needed for that task. When you return to an earlier session, attach the latest versions of any files that changed so Copilot sees their current contents.
 
 ## Exercise 1: Understand the project — 5 minutes
 
@@ -53,9 +64,29 @@ Why is the DOMContentLoaded event useful in this script?
 
 **Checkpoint:** You can identify the page structure in `index.html`, presentation rules in `styles.css`, and behavior in `script.js`.
 
+## Documentation checkpoint 1: Create the README — 4 minutes
+
+Start a **new Copilot Chat session** and keep it for documentation work throughout the lab. Set the mode to **Agent**, include the three files in `starter` as context, and ask:
+
+```text
+Create README.md in the workspace root for the feedback board in starter.
+
+Include a short project overview, the HTML/CSS/JavaScript technology used, instructions
+to open starter/index.html directly in a browser, and a Project status checklist for
+the HTML layout, responsive styling, JavaScript behavior, and final testing.
+
+Describe only what currently exists. Leave unfinished work unchecked. Do not inspect
+the solution folder, change application files, add setup commands, or claim features
+that are not implemented yet.
+```
+
+Review the new `README.md`. Confirm that unfinished features remain unchecked and that it does not describe the `solution` folder as the application. Save the file.
+
+Keep this README session in your chat history. You will return to the same session after Exercise 3 and at the end of the lab.
+
 ## Exercise 2: Add semantic HTML — 8 minutes
 
-**Set Copilot Chat mode to Agent.** You will make three small changes instead of asking Copilot to build the entire interface at once. After each prompt, review and accept the change before continuing.
+Start a **new Copilot Chat session** for the HTML and CSS work, then set the mode to **Agent**. You will make three small changes instead of asking Copilot to build the entire interface at once. After each prompt, review and accept the change before continuing.
 
 Open `starter/index.html` and add it to the chat context.
 
@@ -76,6 +107,8 @@ Do not change the existing header, theme script, stylesheet link, or script refe
 ```
 
 Before accepting, confirm there are exactly two sections and each `aria-labelledby` value matches its heading ID.
+
+After accepting, save `starter/index.html`, refresh the browser, and confirm that the two section headings appear.
 
 ### Step 2: Add the feedback form
 
@@ -99,6 +132,8 @@ aria-live="polite". Do not add styles, scripts, or inline event handlers.
 ```
 
 Before accepting, confirm every label's `for` value matches its control's `id`, and that only rating and comment are required.
+
+After accepting, save `starter/index.html`, refresh the browser, and confirm that the form controls appear under **Add feedback**.
 
 ### Step 3: Add the feedback list
 
@@ -129,7 +164,9 @@ Review the proposed change before accepting it:
 
 If anything is missing, name that one issue in a new prompt instead of asking Copilot to regenerate the page.
 
-**Checkpoint:** Refresh the browser. Both sections and all form controls appear, although styling is still basic.
+Save `starter/index.html`, then refresh the browser.
+
+**Checkpoint:** Both sections and all form controls appear, although styling is still basic.
 
 ## Exercise 3: Create responsive styles — 8 minutes
 
@@ -151,11 +188,26 @@ and stack the section heading on screens below 480px. Keep the existing font.
 
 Inspect the generated CSS. Search the new rules for `#`, `rgb`, or `hsl`; colors in component rules should reference `var(--cp-...)`.
 
-**Checkpoint:** Refresh the browser, then narrow its window. The layout changes from two columns to one, form controls remain usable, and keyboard focus is visible when you press <kbd>Tab</kbd>.
+Save `starter/styles.css`, refresh the browser, then narrow its window.
+
+**Checkpoint:** The layout changes from two columns to one, form controls remain usable, and keyboard focus is visible when you press `Tab`.
+
+## Documentation checkpoint 2: Update the README — 3 minutes
+
+Return to your **README session** from Copilot Chat history. Include the latest `README.md`, `starter/index.html`, and `starter/styles.css` as context, then ask:
+
+```text
+Update only README.md to reflect the HTML and CSS work now completed and verified in
+the browser. Mark only completed checklist items, briefly list the visible interface
+and responsive behavior, and keep JavaScript behavior and final testing unfinished.
+Do not change any application files or inspect the solution folder.
+```
+
+Review the diff, save `README.md`, and confirm that it distinguishes completed work from the remaining JavaScript task.
 
 ## Exercise 4: Add behavior — 10 minutes
 
-**Keep Copilot Chat in Agent mode.** This behavior is a multi-step feature: Copilot needs to inspect the HTML contract, implement the script, and keep several UI states synchronized. Review every proposed tool call and file change.
+Start a **new Copilot Chat session** for JavaScript and review, then set the mode to **Agent**. This behavior is a multi-step feature: Copilot needs to inspect the HTML contract, implement the script, and keep several UI states synchronized. Review every proposed tool call and file change.
 
 Open `starter/script.js`. Include the three starter files as context, then ask Copilot:
 
@@ -177,6 +229,8 @@ and do not use storage, a server, libraries, inline handlers, or alert.
 ```
 
 Before accepting, find where Copilot inserts user-provided text. Keep the change only if it uses `textContent` (or `createTextNode`) rather than `innerHTML`.
+
+Save `starter/script.js` and refresh the browser so it loads the latest JavaScript.
 
 Test in the browser:
 
@@ -210,7 +264,7 @@ Apply only the smallest fix you described to formatFeedbackCount in
 starter/script.js. Do not change any other function.
 ```
 
-Test the count with zero, one, and two items.
+Save `starter/script.js`, refresh the browser, and test the count with zero, one, and two items.
 
 **Set Copilot Chat mode back to Ask** for a focused review that does not automatically change files:
 
@@ -222,17 +276,34 @@ Do not add dependencies or redesign the page.
 
 If the review identifies a valid issue, switch to **Agent mode** before asking Copilot to make that specific correction. Apply only changes you understand and can verify.
 
+After any correction, save the changed file, refresh the browser, and repeat the relevant browser check.
+
 **Checkpoint:** Counts read `0 feedback items`, `1 feedback item`, and `2 feedback items`. You can use the form and buttons with the keyboard, and entered markup stays plain text.
+
+## Documentation checkpoint 3: Finish the README — 3 minutes
+
+Return to the same **README session** once more. Include the latest `README.md` and all three files in `starter` as context, then ask:
+
+```text
+Update only README.md to describe the completed feedback board accurately. Mark the
+JavaScript behavior and final testing complete only if the current files and browser
+checks support that. Summarize validation, clearing, safe text rendering, responsive
+layout, and how to run the site. Remove stale statements about unfinished work.
+Do not change application files or inspect the solution folder.
+```
+
+Review and save `README.md`. Confirm that every completed claim matches something you implemented and tested.
 
 ## Wrap-up — 3 minutes
 
-You used five habits that transfer to larger projects:
+You used six habits that transfer to larger projects:
 
 1. Give Copilot the relevant files and describe the desired outcome.
 2. State constraints such as accessibility, dependencies, and safe APIs.
 3. Ask for small, reviewable changes instead of generating everything at once.
 4. Ask for an explanation before accepting a bug fix.
 5. Verify behavior yourself, including failure cases.
+6. Separate unrelated work into focused sessions and carry forward only useful context.
 
 The `solution` folder contains one complete implementation for comparison. Differences are expected.
 
