@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <title>Workshop Feedback Board</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">GitHub Copilot hands-on lab</p>
+      <h1>Workshop feedback board</h1>
+      <p>Share one thing that helped you learn and see feedback appear instantly.</p>
+    </header>
+
+    <div class="feedback-layout">
+      <section class="panel" aria-labelledby="form-title">
+        <h2 id="form-title">Add feedback</h2>
+        <form id="feedback-form">
+          <div class="field">
+            <label for="name">Name <span>(optional)</span></label>
+            <input id="name" name="name" type="text" maxlength="40" autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label for="rating">Workshop rating</label>
+            <select id="rating" name="rating" required>
+              <option value="">Choose a rating</option>
+              <option value="5">5 - Excellent</option>
+              <option value="4">4 - Good</option>
+              <option value="3">3 - Okay</option>
+              <option value="2">2 - Needs improvement</option>
+              <option value="1">1 - Not useful yet</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="comment">What helped you learn?</label>
+            <textarea
+              id="comment"
+              name="comment"
+              rows="5"
+              maxlength="240"
+              required
+            ></textarea>
+          </div>
+
+          <button class="primary-button" type="submit">Add feedback</button>
+          <p id="form-status" class="status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="feedback-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="feedback-title">Shared feedback</h2>
+            <p id="feedback-count">0 feedback items</p>
+          </div>
+          <button id="clear-button" class="secondary-button" type="button" disabled>
+            Clear all
+          </button>
+        </div>
+        <p id="empty-state" class="empty-state">No feedback yet. Add the first item.</p>
+        <ul id="feedback-list" class="feedback-list" aria-live="polite"></ul>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
