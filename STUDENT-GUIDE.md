@@ -19,18 +19,19 @@ You need:
 
 - A modern web browser
 - Visual Studio Code
+- Git
 - Access to GitHub Copilot and Copilot Chat in Visual Studio Code
-- This workshop folder on your computer
 
 No terminal, local server, build tool, or package installation is required.
 
 ## Setup — 5 minutes
 
-1. Open this workshop folder in Visual Studio Code.
-2. Open `starter/index.html`.
-3. Open the same file from File Explorer in your browser. You should see a heading and introduction.
-4. Keep the browser open. After each accepted change, save the edited file, refresh the page, and inspect the result when the change affects the page.
-5. Open Copilot Chat in Visual Studio Code.
+1. In Visual Studio Code, open the Command Palette and run **Git: Clone**.
+2. Enter `https://github.com/eldondemo/copilot-hands-on.git`, choose a local folder, and open the cloned repository when prompted.
+3. Open `starter/index.html`.
+4. Open the same file from File Explorer in your browser. You should see a heading and introduction.
+5. Keep the browser open. After each accepted change, save the edited file, refresh the page, and inspect the result when the change affects the page.
+6. Open Copilot Chat in Visual Studio Code.
 
 > **Working habit:** Treat every suggestion as a draft. Read the proposed changes, keep only what you understand, and test the result.
 
